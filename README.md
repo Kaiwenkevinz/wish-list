@@ -1,6 +1,6 @@
 # Demo: https://www.mayyourwishescometrue.site
 
-Frontend is hosted on webserver using Nginx
+Frontend is hosted on Nginx
 
 Backend is hosted on Heroku
 
