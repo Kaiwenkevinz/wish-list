@@ -1,4 +1,4 @@
-# Demo: http://www.mayyourwishescometrue.site
+# Demo: https://www.mayyourwishescometrue.site
 
 Frontend is hosted on webserver using Nginx
 
