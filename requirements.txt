@@ -15,6 +15,7 @@ mccabe==0.6.1
 psycopg2==2.8.3
 pycparser==2.19
 pylint==2.3.1
+python-dotenv==0.10.3
 pytz==2019.1
 six==1.12.0
 sqlparse==0.3.0

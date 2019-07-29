@@ -13,6 +13,7 @@ import {
 } from "./types";
 
 axios.defaults.baseURL = 'https://wishlist-backend-server.herokuapp.com';
+// axios.defaults.baseURL = 'http://127.0.0.1:8000';
 
 // export const fetchCategoriesIfNeeded = () => {
 //   return (dispatch, getState) => {

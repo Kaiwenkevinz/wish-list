@@ -5,6 +5,7 @@ import { createMessage } from './messages';
 import { tokenConfig } from './auth';
 
 const API_URL = 'https://wishlist-backend-server.herokuapp.com';
+// const API_URL = 'http://127.0.0.1:8000';
 
 // GET ITEMS
 export const getItems = (link) => (dispatch, getState) => {
@@ -71,6 +72,7 @@ export const createItem = (item) => (dispatch, getState) => {
 export const updateItem = (item) => (dispatch, getState) => {
     let url = `${API_URL}/api/items/${item.id}/`;
 
+    console.log(`updataItem: ${JSON.stringify(item, null, 4)}`);
     axios.put(url, item, tokenConfig(getState))
         .then(res => {
             dispatch({
