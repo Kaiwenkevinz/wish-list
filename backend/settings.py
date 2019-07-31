@@ -12,17 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-import dj_database_url
-import dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Tell dotenv to use env file
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -34,9 +26,6 @@ SECRET_KEY = 'x&*p*1fo(in@(@s(*58jt_ifhi!+cr*o2z@zf0vhdh^0_6+#2j'
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -104,9 +93,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mydb',
+        'USER': 'kaiwenzhang',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -161,5 +157,3 @@ os.path.join(BASE_DIR, 'static'),
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
-del DATABASES['default']['OPTIONS']['sslmode']
