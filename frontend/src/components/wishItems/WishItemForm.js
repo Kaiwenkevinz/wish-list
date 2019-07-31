@@ -50,7 +50,7 @@ class WishItemForm extends Component {
     }
 
     handleSubmit(event) {
-        // event.preventDefault();
+        event.preventDefault();
         window.location.reload();
         if (this.props.item) {
             let newItem = {
