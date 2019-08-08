@@ -58,6 +58,7 @@ export class WishItemsList extends Component {
         
         let items = null;
         let itemsListLayout = null;
+
         try {
             items = this.props.items.data;
             itemsListLayout = items.map(item =>

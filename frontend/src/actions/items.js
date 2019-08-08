@@ -72,7 +72,6 @@ export const createItem = (item) => (dispatch, getState) => {
 export const updateItem = (item) => (dispatch, getState) => {
     let url = `${API_URL}/api/items/${item.id}/`;
 
-    console.log(`updataItem: ${JSON.stringify(item, null, 4)}`);
     axios.put(url, item, tokenConfig(getState))
         .then(res => {
             dispatch({

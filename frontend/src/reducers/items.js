@@ -26,7 +26,6 @@ export default function(state = initialState, action) {
                 items: newState
             };
         case CREATE_ITEM:
-            console.log("reducer run")    
             return {
                     ...state,
                     items: action.payload
