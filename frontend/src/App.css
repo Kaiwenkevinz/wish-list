@@ -7,3 +7,17 @@
 .page-buttons {
     margin-left:auto; margin-right:0;
 }
+
+.grid-container {
+    /* font: 23px "Play"; */
+    position: relative;
+    /* margin-left: 605px; */
+    /* padding-top: 300px; */
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.item-detail-Image {
+    width: 20px;
+    height: 20px;
+}

@@ -3,6 +3,10 @@ import Popup from "reactjs-popup";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// Material-UI
+import NestedGrid from './../NestedGrid';
+import Container from '@material-ui/core/Container';
+
 // user defined
 import WishItemForm from './WishItemForm';
 import { getItems, deleteItems } from '../../actions/items'
@@ -60,44 +64,37 @@ export class WishItemsList extends Component {
         let itemsListLayout = null;
 
         try {
+        // for (let i=0; i < 2; i++){
             items = this.props.items.data;
-            itemsListLayout = items.map(item =>
-                <tr key={item.id+'6'}>
-                    <td key={item.id+item.name+'1'}>{item.name}</td>
-                    <td key={item.id+item.wantness+'2'}>{wantnessOptions.filter(option => option.value == item.wantness)[0].label}</td>
-                    <td key={item.id+item.price+'3'}>{item.price}</td>
-                    <td key={item.id+item.date_created+'4'}>{item.date_created.slice(0,10)}</td>
-                    <td key={item.id+item.result+'5'}>{item.result}</td>
-                    <td key={item.id+"update"}>
-                        <Popup trigger={<button type="button" className="btn btn-outline-primary">Update</button>} modal>
-                            <WishItemForm item={item} options={wantnessOptions}/>
-                        </Popup>
-                    </td>
-                    <td key={item.id+"delete"}><button type="button" className="btn btn-outline-danger" onClick = {() => this.handleDelete(item.id)}>Delete</button></td>
-                </tr>
-            )
+            if (items != null) {
+                itemsListLayout = <NestedGrid data={items}/>;
+            }
+        // }
+            // itemsListLayout = items.map(item =>
+                // <tr key={item.id+'6'}>
+                //     <td key={item.id+item.name+'1'}>{item.name}</td>
+                //     <td key={item.id+item.wantness+'2'}>{wantnessOptions.filter(option => option.value == item.wantness)[0].label}</td>
+                //     <td key={item.id+item.price+'3'}>{item.price}</td>
+                //     <td key={item.id+item.date_created+'4'}>{item.date_created.slice(0,10)}</td>
+                //     <td key={item.id+item.result+'5'}>{item.result}</td>
+                //     <td key={item.id+"update"}>
+                //         <Popup trigger={<button type="button" className="btn btn-outline-primary">Update</button>} modal>
+                //             <WishItemForm item={item} options={wantnessOptions}/>
+                //         </Popup>
+                //     </td>
+                //     <td key={item.id+"delete"}><button type="button" className="btn btn-outline-danger" onClick = {() => this.handleDelete(item.id)}>Delete</button></td>
+                // </tr>
+            // )
+
         } catch(error) {
             console.log(error)
         }
 
         return (
             <div>
-                <table  className="table">
-                    <thead  key="thead">
-                    <tr>
-                        <th>Item</th>
-                        <th>How bad do you want it?</th>
-                        <th>Price</th>
-                        <th>Date Created</th>
-                        <th>Result</th>
-                        <th> </th>
-                        <th> </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {itemsListLayout}
-                    </tbody>
-                </table>
+                <Container className="grid-container" maxWidth="md">
+                    {itemsListLayout}
+                </Container>    
                 {navigationLayout}
             </div>
         );

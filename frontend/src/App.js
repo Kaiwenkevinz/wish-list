@@ -46,7 +46,9 @@ export default class App extends Component {
         <AlertProvider template={AlertTemplate} {...alertOptions}>
             <HashRouter>
               <Fragment>
-                <Header />
+                <div className="header">
+                  <Header />
+                </div>
                 <Alerts/>
                 {CoreLayout}
               </Fragment>
