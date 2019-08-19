@@ -1,4 +1,4 @@
-# Demo: https://www.mayyourwishescometrue.site
+# Demo: https://www.mayyourwishescometrue.site (unavailable, no money to renew ECS)
 
 Frontend is hosted on Nginx
 
