@@ -15,7 +15,8 @@ class WishItem(models.Model):
     price = models.IntegerField(validators=[validate_price])
     date_created = models.DateTimeField("Date created", default=timezone.now)
     result =  models.CharField("result", max_length=255)
+    img_url = models.CharField("img_url", max_length=255)
     owner = models.ForeignKey(User, related_name="item", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.name + ' ' + str(self.wantness) + ' ' + str(self.price) + ' ' + str(self.date_created) + ' ' + self.result
+        return self.name + ' ' + str(self.wantness) + ' ' + str(self.price) + ' ' + str(self.date_created) + ' ' + self.img_url + self.result
