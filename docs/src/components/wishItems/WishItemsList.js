@@ -11,6 +11,11 @@ import Container from '@material-ui/core/Container';
 import WishItemForm from './WishItemForm';
 import { getItems, deleteItems } from '../../actions/items'
 
+import { Upload } from 'antd';
+import { Button } from 'antd';
+import { Icon} from 'antd';
+import 'antd/dist/antd.css'
+
 export class WishItemsList extends Component {
 
     // static propTypes = {
@@ -48,8 +53,27 @@ export class WishItemsList extends Component {
             { value: 3, label: '很想要也很需要' }
         ];
 
+        // *******TODO******
+        var uploadData = ''
+
+
         const navigationLayout = (
             <div className="nav-buttons">
+
+                <Upload 
+                    name="file"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    action="https://upload-z2.qiniup.com"
+                    beforeUpload={this.beforeUpload}
+                    data={uploadData}
+                    onChange={this.handleAvatarChange}
+                    >
+                        <Button>
+                            <Icon type="upload" /> Click to Upload
+                        </Button>
+                </Upload>
+                
                 <Popup trigger={<button type="button" className="btn btn-outline-info">Add</button>} modal>
                     <WishItemForm options={wantnessOptions}/>
                 </Popup>

@@ -10,10 +10,10 @@ const API_URL = 'https://wishlist-backend-server.herokuapp.com';
 // GET ITEMS
 export const getItems = (link) => (dispatch, getState) => {
     
-    let url = `${API_URL}/api/items`;
+    let url = `${API_URL}/api/items/`;
 
     if(link) {
-        url = `${API_URL}${link}`;
+        url = `${API_URL}${link}/`;
     }
 
     axios.get(url, tokenConfig(getState))
@@ -28,7 +28,7 @@ export const getItems = (link) => (dispatch, getState) => {
 
 // DELETE_ITEMS
 export const deleteItems = (id) => (dispatch, getState) => {
-    const url = `${API_URL}/api/items/${id}`;
+    const url = `${API_URL}/api/items/${id}/`;
 
     axios.delete(url, tokenConfig(getState))
         .then(res => {
