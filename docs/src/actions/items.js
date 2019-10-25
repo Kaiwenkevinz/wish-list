@@ -4,8 +4,8 @@ import {GET_ITEMS, DELETE_ITEMS, UPDATE_ITEM, CREATE_ITEM, GET_ERRORS} from './t
 import { createMessage } from './messages';
 import { tokenConfig } from './auth';
 
-const API_URL = 'https://wishlist-backend-server.herokuapp.com';
-// const API_URL = 'http://127.0.0.1:8000';
+// const API_URL = 'https://wishlist-backend-server.herokuapp.com';
+const API_URL = 'http://127.0.0.1:8000';
 
 // GET ITEMS
 export const getItems = (link) => (dispatch, getState) => {

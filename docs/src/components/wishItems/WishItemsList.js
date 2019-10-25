@@ -46,6 +46,14 @@ export class WishItemsList extends Component {
         this.props.deleteItems(id);
     }
 
+    handleAvatarChange(info) {
+        console.log("handleAvatarChange")
+        // console.log(info.file.status)
+        console.log(info.file.response)
+        // const img_url = `http://pzvxbm20p.bkt.clouddn.com/${info.file.response.hash}`
+        // console.log(img_url)
+    }
+
     render() {
         const wantnessOptions = [
             { value: 1, label: '不重要的东西，可以再等等' },
@@ -54,7 +62,9 @@ export class WishItemsList extends Component {
         ];
 
         // *******TODO******
-        var uploadData = ''
+        const uploadData = {
+            'token': "a4QjSp69m13uPcyhFQCIn5FHaOxXgV3_OD4yBEOX:UAbkN6X00s5h9yTqbnoljT8xjgw=:eyJkZWFkbGluZSI6MTU3MjA0Mzg1Niwic2NvcGUiOiJ3aXNobGlzdDk3MTA6MjAxOS0xMC0yNSAxNTo1MDo1Ni4wMjQ1MTAifQ=="
+        }
 
 
         const navigationLayout = (
@@ -65,7 +75,6 @@ export class WishItemsList extends Component {
                     className="avatar-uploader"
                     showUploadList={false}
                     action="https://upload-z2.qiniup.com"
-                    beforeUpload={this.beforeUpload}
                     data={uploadData}
                     onChange={this.handleAvatarChange}
                     >

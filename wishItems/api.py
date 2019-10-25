@@ -7,6 +7,11 @@ from .serializers import WishItemSerializer
 from .models import WishItem 
 
 """
+qiniu token
+"""
+
+
+"""
 List wish items, or create a wish item
 """
 class ItemViewSet(viewsets.ModelViewSet):
