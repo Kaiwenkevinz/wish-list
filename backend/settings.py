@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'wishItems',
     'accounts',
+    'qiniu_token',
     'knox',
 ]
 

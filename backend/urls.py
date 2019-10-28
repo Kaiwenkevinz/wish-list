@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('wishItems.urls')),
     path('', include('accounts.urls')),
+    path('', include('qiniu_token.urls'))
 ]
