@@ -5,21 +5,38 @@ import { connect } from 'react-redux';
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
 
+import axios from 'axios';
+import { Upload } from 'antd';
+import { Button } from 'antd';
+import { Icon} from 'antd';
+import 'antd/dist/antd.css'
+
 import { createItem, updateItem } from '../../actions/items'
+import './index.css';
+
+// const API_URL = 'https://wishlist-backend-server.herokuapp.com';
+const API_URL = 'http://127.0.0.1:8000';
 
 class WishItemForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            img_url: null,
             startDate: new Date(),
             wantness: '',
+            uploadData: {
+                token: null,
+                key: null
+            }
         }
 
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleCreate = this.handleCreate.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleWantnessChange = this.handleWantnessChange.bind(this);
+        this.beforeUpload = this.beforeUpload.bind(this)
+        this.handleAvatarChange = this.handleAvatarChange.bind(this)
     }
 
     componentDidMount() {
@@ -45,7 +62,10 @@ class WishItemForm extends Component {
             'price': parseFloat(this.refs.price.value),
             'date_created': this.state.startDate,
             'result': this.refs.result.value,
+            'img_url': this.state.img_url
         }
+        console.log("handleCreate")
+        console.log(item)
         this.props.createItem(item);
     }
 
@@ -59,16 +79,97 @@ class WishItemForm extends Component {
                 'price': parseFloat(this.refs.price.value),
                 'date_created': this.state.startDate,
                 'result': this.refs.result.value,
+                'img_url': this.state.img_url
             }
+            console.log("handlesubmit")
+            console.log(newItem)
             this.props.updateItem(newItem);
         } else {
             this.handleCreate();
         }
     }
 
+    handleAvatarChange(info) {
+        console.log("handleAvatarChange")
+
+        if (info.file.status === 'done'){
+            console.log(info.file)
+            const img_url = `http://pzvxbm20p.bkt.clouddn.com/${info.file.response.key}`
+            console.log(img_url)
+            this.setState({
+                img_url: img_url
+            })
+        } else {
+            console.log(info.file.response)
+        }
+    }
+
+    async fetchKey(name) {
+        this.setState({
+            uploadData: {
+                ...this.state.uploadData,
+                key: name
+            }
+        })
+        // console.log("1. fetchUploadToken key: " + this.state.uploadData.key)
+    }
+
+    async fetchUploadToken() {
+        await axios({
+            url: `${API_URL}/qiniu/token/`,
+            method:'get',   
+            params: {
+                key: this.state.uploadData.key
+                }  
+            })
+            .then(res=>{
+                this.setState({
+                    uploadData: {
+                        ...this.state.uploadData,
+                        token: res.data
+                    }
+                })
+                // console.log("2. fetchUploadToken token: " + this.state.uploadData)
+            }).catch(err=>{
+                console.log(err)
+            })
+    }
+
+    async beforeUpload(file) {
+        console.log("beforeupload")
+        await this.fetchKey(file.name)
+        await this.fetchUploadToken()
+    }
+
     render() {
         const item = this.props.item;
         const options = this.props.options;
+
+        console.log(item)
+        const imgLayout = (
+            <div>
+                {item || this.state.img_url ?
+                    (<div className="form-img-preview"> 
+                        <img src={this.state.img_url} height="200" width="200"/>
+                    </div>) :
+                    (
+                        <Upload 
+                            name="file"
+                            className="avatar-uploader"
+                            showUploadList={false}
+                            beforeUpload={this.beforeUpload}
+                            action="https://upload-z2.qiniup.com"
+                            data={this.state.uploadData}
+                            onChange={this.handleAvatarChange}
+                            >
+                                <Button>
+                                    <Icon type="upload" /> Click to Upload
+                                </Button>
+                        </Upload>
+                    )
+                }
+            </div>
+        )
 
         const nameLayout = (
             <div className="form-group row">
@@ -146,6 +247,7 @@ class WishItemForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    {imgLayout}
                     {nameLayout}
                     {wantnessLayout}
                     {priceLayout}

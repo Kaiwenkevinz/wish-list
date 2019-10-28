@@ -29,6 +29,7 @@ export const getItems = (link) => (dispatch, getState) => {
 // DELETE_ITEMS
 export const deleteItems = (id) => (dispatch, getState) => {
     const url = `${API_URL}/api/items/${id}/`;
+    console.log("deleteitems")
 
     axios.delete(url, tokenConfig(getState))
         .then(res => {

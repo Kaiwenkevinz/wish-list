@@ -15,13 +15,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NestedGrid(data) {
+export default function NestedGrid(props) {
 
     const classes = useStyles();
 
-    let content = data.data.map(wishItem => 
+    let content = props.props.items.map(wishItem => 
             <Grid item xs={4} key={wishItem.id}>
-                <MediaCard item={wishItem}/>
+                <MediaCard item={wishItem} func={props.props.func}/>
             </Grid>
         )
 
